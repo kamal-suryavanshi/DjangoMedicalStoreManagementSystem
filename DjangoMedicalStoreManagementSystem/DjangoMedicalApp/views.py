@@ -8,21 +8,23 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from DjangoMedicalApp.models import Company
-
 from DjangoMedicalApp.serializer import CompanySerializer
 
 
+# Creating CompanyViewSet
 class CompanyViewSet(viewsets.ViewSet):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
-    def list(self, request):
+    @staticmethod
+    def list(request):
         company = Company.objects.all()
         serializer = CompanySerializer(company, many=True, context={"request": request})
         dict_response = {"error": False, "message": "All Company List Data", "data": serializer.data}
         return Response(dict_response)
 
-    def create(self, request):
+    @staticmethod
+    def create(request):
         try:
             serializer = CompanySerializer(data=request.data, context={"request": request})
             serializer.is_valid()
@@ -32,7 +34,8 @@ class CompanyViewSet(viewsets.ViewSet):
             dict_response = {"error": False, "message": "Error During Saving Company Data"}
         return Response(dict_response)
 
-    def update(self, request, pk=None):
+    @staticmethod
+    def update(request, pk=None):
         try:
             queryset = Company.objects.all()
             company = get_object_or_404(queryset, pk=pk)

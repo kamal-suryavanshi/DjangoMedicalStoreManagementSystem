@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class DjangomedicalappConfig(AppConfig):
+class DjangoMedicalAppConfig(AppConfig):
     name = 'DjangoMedicalApp'

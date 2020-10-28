@@ -1,6 +1,8 @@
 from django.db import models
 
 
+# Creating all the required models for the app to store the data within.
+
 class Company(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
@@ -13,7 +15,6 @@ class Company(models.Model):
     objects = models.Manager()
 
 
-# Create your models here.
 class Medicine(models.Model):
     id = models.AutoField(primary_key=True)
     company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
@@ -126,4 +127,3 @@ class EmployeeBank(models.Model):
     Employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
     added_on = models.DateField(auto_now_add=True)
     objects = models.Manager()
-
